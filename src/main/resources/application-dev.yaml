@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://rootstudio:Root.Studio@dms.41izj.mongodb.net/dms?retryWrites=true&w=majority&appName=DMS
+      uri: mongodb+srv://rootstudio:Root.Studio@dms.41izj.mongodb.net/tms?retryWrites=true&w=majority&appName=DMS
       auto-index-creation: true
 
   mongodb:

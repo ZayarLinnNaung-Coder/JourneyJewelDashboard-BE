@@ -2,4 +2,4 @@
 /.idea
 *.class
 /target
-src/main/java/rootstudio/development/dms/InitRunner.java
+src/main/java/rootstudio/development/tms/InitRunner.java

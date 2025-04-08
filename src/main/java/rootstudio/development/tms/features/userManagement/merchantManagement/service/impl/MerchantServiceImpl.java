@@ -1,0 +1,144 @@
+package rootstudio.development.tms.features.userManagement.merchantManagement.service.impl;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.*;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
+import rootstudio.development.tms.features.userManagement.merchantManagement.domain.request.AddMerchantRequest;
+import rootstudio.development.tms.features.userManagement.merchantManagement.domain.request.MerchantRequest;
+import rootstudio.development.tms.features.userManagement.merchantManagement.domain.request.UpdateMerchantRequest;
+import rootstudio.development.tms.features.userManagement.merchantManagement.domain.response.AddMerchantResponse;
+import rootstudio.development.tms.features.userManagement.merchantManagement.domain.response.MerchantDetailsResponse;
+import rootstudio.development.tms.features.userManagement.merchantManagement.domain.response.MerchantResponse;
+import rootstudio.development.tms.features.userManagement.merchantManagement.domain.response.UpdateMerchantResponse;
+import rootstudio.development.tms.features.userManagement.merchantManagement.repo.MerchantRepository;
+import rootstudio.development.tms.features.userManagement.merchantManagement.service.MerchantService;
+import rootstudio.development.tms.global.constants.ErrorCodeConstants;
+import rootstudio.development.tms.global.constants.SuccessCodeConstants;
+import rootstudio.development.tms.global.document.Merchant;
+import rootstudio.development.tms.global.exception.model.*;
+import rootstudio.development.tms.global.utils.MessageBundle;
+
+import java.text.MessageFormat;
+
+@Service
+@Slf4j
+public class MerchantServiceImpl implements MerchantService {
+
+    @Autowired
+    MongoTemplate mongoTemplate;
+    @Autowired
+    MerchantRepository merchantRepository;
+
+    @Autowired
+    MessageBundle messageBundle;
+
+    @Override
+    public AddMerchantResponse addMerchant(AddMerchantRequest request) {
+
+        if (mongoTemplate.exists(new Query(Criteria.where("email").is(request.getEmail())), Merchant.class)) {
+            throw new EmailAlreadyExistsException(ErrorCodeConstants.ERR_ME0001, messageBundle.getMessage(ErrorCodeConstants.ERR_ME0001));
+        }
+
+        if (mongoTemplate.exists(new Query(Criteria.where("phoneNumber").is(request.getPhoneNumber())), Merchant.class)) {
+            throw new PhoneNumberAlreadyExistsException(ErrorCodeConstants.ERR_ME001, messageBundle.getMessage(ErrorCodeConstants.ERR_ME001));
+        }
+
+        Merchant merchant = Merchant.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .phoneNumber(request.getPhoneNumber())
+                .address(request.getAddress())
+                .contractStartDate(request.getContractStartDate())
+                .contractEndDate(request.getContractEndDate())
+                .build();
+
+        Merchant savedMerchant = mongoTemplate.save(merchant);
+
+        return AddMerchantResponse.of(savedMerchant);
+    }
+    @Override
+    public Page<MerchantResponse> searchMerchants(MerchantRequest request) {
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+
+        Page<Merchant> merchants = merchantRepository.searchByQuery(request.getQuery(), pageable);
+
+        return merchants.map(MerchantResponse::of);
+    }
+    @Override
+    public UpdateMerchantResponse updateMerchant(String id, UpdateMerchantRequest request) {
+
+        String merchantNotFoundErr = MessageFormat.format(
+                messageBundle.getMessage(ErrorCodeConstants.ERR_COM006), messageBundle.getMessage(ErrorCodeConstants.ERR_COM006), id
+        );
+
+        Query query = new Query(Criteria.where("_id").is(id));
+        Merchant existingMerchant = mongoTemplate.findOne(query, Merchant.class);
+
+        if (existingMerchant == null) {
+            throw new NotFoundCommonException(ErrorCodeConstants.ERR_COM006, merchantNotFoundErr);
+        }
+
+        existingMerchant.setName(request.getName());
+        existingMerchant.setEmail(request.getEmail());
+        existingMerchant.setPhoneNumber(request.getPhoneNumber());
+        existingMerchant.setAddress(request.getAddress());
+        existingMerchant.setContractStartDate(request.getContractStartDate());
+        existingMerchant.setContractEndDate(request.getContractEndDate());
+
+        try {
+            mongoTemplate.save(existingMerchant);
+        } catch (DuplicateKeyException e) {
+            String errorMessage = e.getMessage().toLowerCase();
+            if (errorMessage.contains("email")) {
+                throw new EmailAlreadyExistsException(ErrorCodeConstants.ERR_ME0001, messageBundle.getMessage(ErrorCodeConstants.ERR_ME0001));
+            } else if (errorMessage.contains("phoneNumber")) {
+                throw new PhoneNumberAlreadyExistsException(ErrorCodeConstants.ERR_ME001, messageBundle.getMessage(ErrorCodeConstants.ERR_ME001));
+            }
+            throw e;
+        }
+        return UpdateMerchantResponse.of(existingMerchant);
+    }
+
+    @Override
+    public void deleteMerchant(String id) {
+        try {
+            Query query = new Query(Criteria.where("_id").is(id));
+            Merchant merchant = mongoTemplate.findOne(query, Merchant.class);
+
+            if (merchant == null) {
+                throw new NotFoundCommonException(ErrorCodeConstants.ERR_ACC003, "Merchant not found.");
+            }
+
+            merchant.setDeleted(true);
+            mongoTemplate.save(merchant);
+
+            log.info(SuccessCodeConstants.SUC_COM001, messageBundle.getMessage(SuccessCodeConstants.SUC_COM001), id);
+        } catch (NotFoundCommonException e) {
+            log.error(ErrorCodeConstants.ERR_ACC003, "Error occurred while deleting merchant: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.error(ErrorCodeConstants.ERR_COM005, "Unexpected error occurred while deleting merchant", e);
+            throw new BusinessException(ErrorCodeConstants.ERR_COM005, "Unexpected error occurred while deleting merchant: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public MerchantDetailsResponse getMerchantDetails(String id) {
+        String merchantNotFoundMessage = MessageFormat.format(messageBundle.getMessage(ErrorCodeConstants.ERR_COM006), "merchant", id);
+
+        Query query = new Query(Criteria.where("_id").is(id));
+        Merchant merchant = mongoTemplate.findOne(query, Merchant.class);
+
+        if (merchant == null) {
+            throw new AccountNotFoundException(ErrorCodeConstants.ERR_DM001, merchantNotFoundMessage);
+        }
+
+        return MerchantDetailsResponse.of(merchant);
+    }
+
+}

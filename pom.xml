@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>rootstudio.development</groupId>
-	<artifactId>dms</artifactId>
+	<artifactId>tms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dms</name>
 	<description>Demo project for Spring Boot</description>

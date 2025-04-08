@@ -1,0 +1,13 @@
+package rootstudio.development.tms.features.serviceManagement.deliveryServiceManagement.domains.request;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class AllDeliveryServiceRequest {
+
+    private String query;
+    private int size;
+    private int page;
+}
