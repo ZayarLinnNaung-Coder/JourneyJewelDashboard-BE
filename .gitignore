@@ -1,0 +1,5 @@
+
+/.idea
+*.class
+/target
+src/main/java/rootstudio/development/dms/InitRunner.java

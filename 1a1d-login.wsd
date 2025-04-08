@@ -1,0 +1,34 @@
+@startuml
+
+actor user
+participant DMS
+database mongo
+database redis
+
+user -> DMS: valid login request
+DMS -> mongo: check in mongodb
+mongo -> DMS: response
+alt login success
+    DMS -> redis: check current login token [1A1D_CURRENT_TOKEN_+ {userId}]
+    redis ->  DMS: resposne
+    alt no current login
+        DMS -> DMS: generate new login token
+        DMS -> redis: save login token
+        redis -> DMS: resposne with X-AGENT header
+        DMS -> user: login success response
+    else already login
+        DMS -> DMS: get login token from header:  X-AGENT
+        DMS -> DMS: validate with the token from redis
+        alt the same token 
+            DMS -> user: login success response
+        else 
+            DMS -> user: login error
+        end
+        DMS -> user: already user login error
+    end
+else login fail
+    DMS -> user: login error
+end
+
+
+@enduml

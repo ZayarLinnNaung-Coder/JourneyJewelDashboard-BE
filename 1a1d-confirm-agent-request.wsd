@@ -1,0 +1,24 @@
+@startuml confirm to request for new device
+
+actor user
+participant DMS
+database mongo
+database redis
+
+user -> DMS: confirm forget agent request
+DMS -> mongo: get user from mongo
+mongo -> DMS: response
+alt if no user
+    DMS -> user: no user exception
+end
+DMS -> redis: find 1A1D_REQUST_VALID_TOKEN_ + {user_id}
+redis -> DMS: response
+alt same otp from redis
+    DMS -> redis: delete 1A1D_REQUST_VALID_TOKEN_ + {user_id}
+    DMS -> redis: delete 1A1D_CURRENT_TOKEN_ + {user_id}
+    DMS -> user: success resposne to login again
+else
+    DMS -> user: invalid otp response
+end
+
+@enduml

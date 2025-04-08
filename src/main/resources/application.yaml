@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: dms
+  profiles:
+    active: dev
+
+dms:
+  app:
+    jwtSecret: fJ6K8CZjHbhsptDUBPB+8phSjdHtR/nfHcPbKMEoC6o=
+    jwtExpirationMs: 86400000
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+    org.springframework.data.mongodb.core.query: DEBUG
+    mongodb.driver: INFO
+
+
+  task:
+    execution:
+      pool:
+        core-size: 5  # The core number of threads to keep alive
+        max-size: 10   # The maximum number of threads to allow in the pool
+        queue-capacity: 500  # The capacity of the queue for holding tasks before execution
+        keep-alive: 60s  # The time for which an idle thread will wait for new tasks before being terminated

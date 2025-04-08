@@ -1,0 +1,51 @@
+[33mcommit dab1e1783a6b715213a68fae1931b759b8145a80[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/2024-12/fetch-teammate-endpoint[m[33m, [m[1;31morigin/feature/2024-12/fetch-teammate-endpoint[m[33m, [m[1;32mbackup-branch[m[33m)[m
+Merge: 5dbd75a 68a9e0e
+Author: Yin Phyu <yinphyup@gmail.com>
+Date:   Mon Dec 23 19:20:06 2024 +0630
+
+    Merge branch 'feature/2024-12/fetch-teammate-endpoint' of github.com:RootStudioOfficial/dms-be into feature/2024-12/fetch-teammate-endpoint
+
+[33mcommit 5dbd75abbe2f5190577c97a32267d8b8ac64cb31[m[33m ([m[1;32mfeature/2024-12/init-project-structure[m[33m)[m
+Author: Yin Phyu <yinphyup@gmail.com>
+Date:   Mon Dec 23 10:09:11 2024 +0630
+
+    01-addteammate
+
+[33mcommit 68a9e0e1344a26aa751ee2b934d430052943c8f1[m
+Author: Zayar Linn Naung <zayarlinnaung@lomtech.net>
+Date:   Sun Dec 22 21:31:25 2024 +0630
+
+    add git ignore for /target files
+
+[33mcommit 5b96ac1ad67735a5d264b6cabb76e9d3d1174e2e[m
+Author: Yin Phyu <yinphyup@gmail.com>
+Date:   Thu Dec 19 22:34:08 2024 +0630
+
+    01-Fetch-teammate-exclude-deletedOne
+
+[33mcommit 93b9941df5c049dc04aee4d4864db6421d60bd0f[m
+Author: Yin Phyu <yinphyup@gmail.com>
+Date:   Thu Dec 19 22:32:19 2024 +0630
+
+    "Fetch teammate exclude deleted ones"
+
+[33mcommit f9dbdad4d3ebccf22ae0a94665cc7959bea8c114[m[33m ([m[1;31morigin/feature/2024-12/invite-teammate[m[33m, [m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m
+Merge: 1582646 78930b2
+Author: RootStudioOfficial <admin@rootstudio.asia>
+Date:   Wed Dec 18 22:26:50 2024 +0630
+
+    Merge pull request #1 from RootStudioOfficial/feature/2024-12/init-project-structure
+    
+    feature/2024-12/init-project-structure
+
+[33mcommit 78930b2d720f17ea9648fb71bc1e5381c0384185[m[33m ([m[1;31morigin/feature/2024-12/init-project-structure[m[33m)[m
+Author: Zayar Linn Naung <zayarlinnaung@lomtech.net>
+Date:   Wed Dec 18 22:24:00 2024 +0630
+
+    init project
+
+[33mcommit 1582646124477890f2e0bb24d656b49b5bb60b5f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Zayar Linn Naung <zayarlinnaung@lomtech.net>
+Date:   Mon Dec 16 11:26:33 2024 +0630
+
+    init project

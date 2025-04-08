@@ -1,0 +1,80 @@
+[
+  {
+    "country": "Myanmar",
+    "countryCode": "MM",
+    "cities": [
+      {
+        "name": "Yangon",
+        "townships": [
+          "Ahlone", "Bahan", "Botahtaung", "Dagon", "Hlaing", "Hlaingthaya",
+          "Insein", "Kamayut", "Kyauktada", "Lanmadaw", "Latha", "Mayangone",
+          "Mingaladon", "Mingalartaungnyunt", "Pazundaung", "Sanchaung",
+          "Shwepyithar", "South Okkalapa", "Tamwe", "Thaketa", "Thingangyun",
+          "Yankin", "North Okkalapa", "Dawbon", "Seikkan", "Dagon Seikkan"
+        ]
+      },
+      {
+        "name": "Mandalay",
+        "townships": [
+          "Aungmyaythazan", "Chanayethazan", "Maha Aungmye", "Chanmyathazi",
+          "Pyigyidagun", "Amarapura", "Patheingyi", "Madaya", "Singu", "Myingyan"
+        ]
+      },
+      {
+        "name": "Naypyidaw",
+        "townships": [
+          "Zabuthiri", "Dekkhinathiri", "Pyinmana", "Pobbathiri", "Ottarathiri",
+          "Lewe", "Tatkon"
+        ]
+      },
+      {
+        "name": "Bago",
+        "townships": [
+          "Bago", "Taungoo", "Pyay", "Thayarwady", "Paungde", "Letpadan"
+        ]
+      },
+      {
+        "name": "Taunggyi",
+        "townships": [
+          "Taunggyi", "Nyaungshwe", "Kalaw", "Pindaya", "Ywangan"
+        ]
+      },
+      {
+        "name": "Mawlamyine",
+        "townships": [
+          "Mawlamyine", "Mudon", "Thanbyuzayat", "Chaungzon"
+        ]
+      },
+      {
+        "name": "Pathein",
+        "townships": [
+          "Pathein", "Hinthada", "Ngapudaw", "Labutta"
+        ]
+      },
+      {
+        "name": "Monywa",
+        "townships": [
+          "Monywa", "Sagaing", "Shwebo", "Yinmabin"
+        ]
+      },
+      {
+        "name": "Myitkyina",
+        "townships": [
+          "Myitkyina", "Bhamo", "Mohnyin", "Putao"
+        ]
+      },
+      {
+        "name": "Sittwe",
+        "townships": [
+          "Sittwe", "Maungdaw", "Kyaukpyu", "Ann", "Minbya"
+        ]
+      },
+      {
+        "name": "Hpa-An",
+        "townships": [
+          "Hpa-An", "Hlaingbwe", "Thandaung", "Kyaikmaraw"
+        ]
+      }
+    ]
+  }
+]

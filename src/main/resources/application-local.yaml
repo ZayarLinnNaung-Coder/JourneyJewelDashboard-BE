@@ -1,0 +1,22 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/dms?retryWrites=true&w=majority
+      auto-index-creation: true
+
+  redis:
+    host: localhost
+    port: 6379
+    username:
+    password:
+#    timeout: 3000
+#    jedis:
+#      pool:
+#        max-active: 8
+#        max-idle: 8
+#        min-idle: 0
+#        max-wait: -1
+#        timeout: 3000
+
+server:
+  port: 8090

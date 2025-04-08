@@ -1,0 +1,24 @@
+@startuml
+actor user
+participant "DMS" as DMS
+database "mongo" as Mongo
+database "redis" as Redis
+
+user -> DMS: request /1a1d/request
+DMS -> Resis: check key in reids [1A1D_REQUST_CONFIRM_TOKEN_{userId}]
+alt if key in redis
+    DMS -> Redis: check pending in redis [1A1D_PENDING_TOKEN_{userId}]
+    Redis --> DMS: response
+
+    alt no pending request
+        DMS -> Redis: save the token [1A1D_PENDING_TOKEN_{userId}]
+        DMS --> user: success response with X-AGENT header
+    else already pending request
+        DMS --> user: response
+    end
+else no key in redis
+    DMS -> user: error to confirm again ERR_1A1D00x
+end
+
+
+@enduml

@@ -1,0 +1,33 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://rootstudio:Root.Studio@dms.41izj.mongodb.net/dms?retryWrites=true&w=majority&appName=DMS
+      auto-index-creation: true
+
+  mongodb:
+    pool:
+      max-size: 10        # Maximum number of connections in the pool
+      min-size: 3        # Minimum number of connections
+      max-connection-idle-time: 30s  # Max idle time before closing unused connections
+      max-connection-life-time: 60s # Max lifetime of a connection
+      max-wait-time: 10s  # Max time to wait for a connection
+      maintenance-frequency: 5s  # Frequency of pool maintenance
+      maintenance-initial-delay: 0s # Initial delay for maintenance
+
+  redis:
+    host: redis-11686.c295.ap-southeast-1-1.ec2.redns.redis-cloud.com
+    port: 11686
+    username: default
+    password: j62vscse102H1IDteR4CEBHBfw1wn5S5
+#    timeout: 3000
+#    jedis:
+#      pool:
+#        max-active: 8
+#        max-idle: 8
+#        min-idle: 0
+#        max-wait: -1
+#        timeout: 3000
+
+server:
+  port: 8090
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP for Device Reset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .otp-code {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d9534f;
+            text-align: center;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>Device Reset OTP</h1>
+    </div>
+    <div class="content">
+        <p>Dear User,</p>
+        <p>Your One-Time Password (OTP) for resetting your device is:</p>
+        <p class="otp-code" th:text="${otp}"></p>
+        <p>This OTP is valid for 15 minutes. Please do not share it with anyone.</p>
+        <p>Best regards,<br/>RootStudio Team</p>
+    </div>
+    <div class="footer">
+        &copy; <span th:text="${year}"></span> RootStudio.Asia. All rights reserved.
+    </div>
+</div>
+</body>
+</html>
