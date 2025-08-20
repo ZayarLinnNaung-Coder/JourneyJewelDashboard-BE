@@ -14,6 +14,8 @@ public class Hotels extends BaseDocument{
     private String id;
 
     private String name;
+    private String phoneNumber;
+    private String imageUrl;
     private String description;
     private String placeId;
     private List<RoomType> roomTypes;

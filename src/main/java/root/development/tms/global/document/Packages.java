@@ -1,26 +1,25 @@
 package root.development.tms.global.document;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import root.development.tms.global.enumeration.PlaceType;
 
 @Document
 @Getter
 @Setter
-@Builder
-public class Place extends BaseDocument{
+public class Packages extends BaseDocument{
 
     @Id
     private String id;
 
     private String name;
-    private String place;
-    private Double minBudget;
     private String description;
-    private PlaceType placeType;
-    private String imageUrl;
+    private String price;
+    private String placeId;
+    private String hotelId;
+    private String transportationId;
+    private String selectedRoomType;
+    private String selectedMealPlan;
 
 }

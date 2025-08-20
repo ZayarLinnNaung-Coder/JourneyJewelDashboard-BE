@@ -15,6 +15,8 @@ public class Transportation extends BaseDocument{
 
     private String name;
     private String description;
+    private String timeList;
+    private String phoneNumber;
     private List<Price> priceList;
 
     @Getter
