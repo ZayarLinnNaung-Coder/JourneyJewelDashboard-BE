@@ -15,6 +15,7 @@ public class Packages extends BaseDocument{
 
     private String name;
     private String description;
+    private String merchantId;
     private String price;
     private String placeId;
     private String hotelId;
