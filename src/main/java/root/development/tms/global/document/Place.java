@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import root.development.tms.global.enumeration.PlaceType;
 
+import java.util.List;
+
 @Document
 @Getter
 @Setter
@@ -22,5 +24,12 @@ public class Place extends BaseDocument{
     private String description;
     private PlaceType placeType;
     private String imageUrl;
+    private List<AdditionalImage> additionalImages;
+
+    @Getter
+    @Setter
+    public static class AdditionalImage{
+        private String url;
+    }
 
 }
