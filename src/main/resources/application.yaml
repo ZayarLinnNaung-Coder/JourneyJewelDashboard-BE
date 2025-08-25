@@ -2,7 +2,7 @@ spring:
   application:
     name: dms
   profiles:
-    active: dev
+    active: local
 
 dms:
   app:
