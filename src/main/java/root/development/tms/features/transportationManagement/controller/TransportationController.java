@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import root.development.tms.features.transportationManagement.repo.TransportationRepo;
 import root.development.tms.global.document.Transportation;
@@ -33,13 +34,19 @@ public class TransportationController {
     @GetMapping
     Page<Transportation> getAllTransportations(
             @RequestParam(required = false) String name,
+            @RequestParam(required = false) String placeId,
             @RequestParam(defaultValue = "10") Integer size, @RequestParam(defaultValue = "0") Integer page
     ){
         Pageable pageable = PageRequest.of(page, size);
 
+        if(StringUtils.hasText(placeId)) {
+            return transportationRepo.findByPriceListPlaceId(placeId, pageable);
+        }
+
         if (name == null || name.trim().isEmpty()) {
             return transportationRepo.findAll(pageable);
-        } else {
+        }
+        else {
             return transportationRepo.findByName(name, pageable);
         }
     }

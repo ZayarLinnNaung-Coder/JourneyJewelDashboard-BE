@@ -7,4 +7,5 @@ import root.development.tms.global.document.Hotels;
 
 public interface HotelRepo extends MongoRepository<Hotels, String> {
     Page<Hotels> findByName(String name, Pageable pageable);
+    Page<Hotels> findByPlaceId(String placeId, Pageable pageable);
 }

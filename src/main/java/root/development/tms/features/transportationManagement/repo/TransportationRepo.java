@@ -7,4 +7,5 @@ import root.development.tms.global.document.Transportation;
 
 public interface TransportationRepo extends MongoRepository<Transportation, String> {
     Page<Transportation> findByName(String name, Pageable pageable);
+    Page<Transportation> findByPriceListPlaceId(String placeId, Pageable pageable);
 }

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import root.development.tms.features.hotelManagement.repo.HotelRepo;
 import root.development.tms.global.document.Hotels;
@@ -33,9 +34,14 @@ public class HotelController {
     @GetMapping
     Page<Hotels> getAllTransportations(
             @RequestParam(required = false) String name,
+            @RequestParam(required = false) String placeId,
             @RequestParam(defaultValue = "10") Integer size, @RequestParam(defaultValue = "0") Integer page
     ){
         Pageable pageable = PageRequest.of(page, size);
+
+        if(StringUtils.hasText(placeId)) {
+            return hotelRepo.findByPlaceId(placeId, pageable);
+        }
 
         if (name == null || name.trim().isEmpty()) {
             return hotelRepo.findAll(pageable);
