@@ -24,6 +24,7 @@ public class Place extends BaseDocument{
     private String description;
     private PlaceType placeType;
     private String imageUrl;
+    private String isAvailable;
     private List<AdditionalImage> additionalImages;
 
     @Getter

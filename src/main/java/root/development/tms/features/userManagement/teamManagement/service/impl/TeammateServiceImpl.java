@@ -69,7 +69,7 @@ public class TeammateServiceImpl implements TeammateService {
                 .role(role)
                 .email(newTeammate.getEmail())
                 .password(encryptedPassword)
-                .accountStatus(AccountStatus.PENDING)
+                .accountStatus(AccountStatus.ACTIVE)
                 .build();
         adminRepo.save(admin);
 
